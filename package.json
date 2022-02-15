@@ -1,0 +1,80 @@
+{
+	"name": "gunk-vscode",
+	"displayName": "Gunk",
+	"description": "Gunk is a modern frontend syntax for Protocol Buffers, using Go-derived syntax for defining types and services.",
+	"version": "0.0.1",
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -b",
+		"watch": "tsc -b -w"
+	},
+	"publisher": "hhhapz",
+	"author": {
+		"name": "Hamza Ali"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^12.12.0",
+		"@typescript-eslint/eslint-plugin": "^4.23.0",
+		"@typescript-eslint/parser": "^4.23.0",
+		"eslint": "^7.26.0",
+		"typescript": "^4.4.3"
+	},
+	"engines": {
+		"vscode": "^1.64.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"activationEvents": [
+		"onLanguage:gunk"
+	],
+	"main": "./client/out/extension",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Gunk",
+			"properties": {
+				"gunk.lsp.enabled": {
+					"scope": "resource",
+					"type": "boolean",
+					"default": true,
+					"description": "Controls whether GunkLS is enabled for this workspace."
+				},
+				"gunk.lsp.commandPath": {
+					"scope": "resource",
+					"type": "string",
+					"default": "gunkls",
+					"description": "Path to the GunkLS binary (default is to search PATH)."
+				},
+				"gunk.lsp.linting": {
+					"scope": "resource",
+					"type": "boolean",
+					"default": false,
+					"description": "Whether to enable linting."
+				},
+				"gunk.lsp.commandArgs": {
+					"scope": "resource",
+					"type": "string",
+					"default": "",
+					"description": "Args to GunkLS. If non-empty, will override all other configuration parameters."
+				}
+			}
+		},
+		"languages": [{
+			"id": "gunk",
+			"aliases": ["Gunk", "gunk"],
+			"extensions": [".gunk"],
+			"configuration": "./language-configuration.json",
+			"icon": {
+				"light": "./light.png",
+				"dark": "./dark.png"
+			}
+		}],
+		"grammars": [{
+			"language": "gunk",
+			"scopeName": "source.gunk",
+			"path": "./syntaxes/gunk.tmLanguage.json"
+		}]
+	}
+}
